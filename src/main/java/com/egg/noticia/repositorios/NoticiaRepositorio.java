@@ -7,9 +7,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface NoticiaRepositorio extends JpaRepository<Noticia, String>{
-    
+public interface NoticiaRepositorio extends JpaRepository<Noticia, String> {
+
     @Query("SELECT n FROM Noticia n WHERE n.titulo = :titulo")
     public Noticia buscarNorticiaPorTitulo(@Param("titulo") String titulo);
-    
+
 }

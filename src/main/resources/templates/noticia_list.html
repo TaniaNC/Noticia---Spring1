@@ -8,7 +8,7 @@
                     </head>
                     <body>
                         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                            <a class="navbar-brand" href="#"> NEWS</a>
+                            <a class="navbar-brand" href="#">NEWS</a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
@@ -18,53 +18,65 @@
                                         <a class="nav-link" th:href="@{/}">Inicio </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" th:href="@{/noticia/registrar}">Crear Noticia </a>
+                                        <a class="nav-link" th:href="@{/noticia/registrar}">Crear noticia</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" th:href="@{../noticia/lista}">Listar Noticias</a>
+                                        <a class="nav-link" th:href="@{/noticia/lista}">Listar Noticias <span class="sr-only">(ahora)</span></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" th:href="@{../noticia/eliminar}">Eliminar Noticia <span class="sr-only">(ahora)</span></a>
+                                        <a class="nav-link" th:href="@{../noticia/eliminar}">Eliminar Noticias</a>
                                     </li>
                                 </ul>
                             </div>
                         </nav>
 
-                                    <h1>Eliminar noticia</h1>
+                        <div class="container m-5" >
 
+                            <table class="table table-dark">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Titulo</th>
+                                        <th scope="col">Cuerpo</th>
+                                        <th scope="col" sec:authorize="hasRole('ADMIN')" >Acciones</th>
 
-                        <div class="form-group my-3">
-                            <form class="formulario" action="/noticia/eliminacion" method="POST">
+                                    </tr>
+                                </thead>
+                                <tbody th:each="noticia : ${noticias}"> 
+                                    <tr>
+                                        <th scope="row" th:text="${noticia.id}"></th>
+                                        <td th:text="${noticia.titulo}"></td>
+                                        <td th:text="${noticia.cuerpo}"></td>
+                                        <td>
+                                            
+                                            <a sec:authorize="hasRole('ADMIN')" th:href= "@{/noticia/modificar/__${noticia.id}__}">
+                                                <i class="fas fa-feather-alt"></i> Modificar </a>
+                                           
+                                        </td>
+                                    </tr>
 
-                                <select name="titulo">
+                                </tbody>
+                            </table>
 
-                                    <option >Seleccionar Noticia</option>
-
-                                    <option 
-                                        th:each="noticia : ${noticias}"
-                                        th:value="${noticia.titulo}"
-                                        th:text="${noticia.titulo}" 
-                                        />
-                                </select>
-                                <br>
-                                    
-                                <button type="submit" class="btn btn-primary mt-3 botones">Eliminar</button>
-
-                            </form>
 
                         </div>
+
                         <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
                             <div class="card-body">
                                 <h5 class="card-title">Exito!</h5>
                                 <p class="card-text" th:text="${exito}"></p>
                             </div>
                         </div>
+
+
                         <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError" >
                             <div class="card-body">
                                 <h5 class="card-title">Error 👎</h5>
                                 <p class="card-text" th:text="${error}"></p>
                             </div>
                         </div>
+
+
                         <section class=" text-center container">
                             <div class="row mt-3">
                                 <div class="divVolver">

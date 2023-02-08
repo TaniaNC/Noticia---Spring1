@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="ISO-8859-1">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
+                  integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+                <link rel="stylesheet" href="/css/formulario.css">
+                    </head>
+                    <body>
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                            <a class="navbar-brand" href="#">NEWS</a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" th:href="@{/}">Inicio</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/noticia/registrar}">Crear noticia</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/noticia/lista}">Listar Noticias</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/noticia/eliminar}">Eliminar Noticias</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+
+                        <div class="form-group my-3">
+
+                            <form class="formulario" th:action="@{/noticia/modificar/__${noticia.id}__}" method="POST">
+
+                                <!-- SE ESPERA LA VARIABLE ID, POR ESO DEBE "VIAJAR" ESCONDIDA-->
+                                <input hidden th:value="${id}" name="id">
+
+                                    <div class="form-group my-3">
+                                        <h3 class="mb-2">Modificar Noticia</h3> 
+                                    </div>
+
+                                    <div class="form-group my-3">
+                                        <label class="mb-2">ID de la Noticia:</label>
+                                        <input th:value="${noticia.id}" type="text" name="id"  size="27">
+                                    </div>   
+
+                                    <div class="form-group my-3">
+                                        <label class="mb-2">Titulo a modificar</label><br >
+                                            <input th:value="${noticia.titulo}" type="text" name="titulo" placeholder="Titulo de la noticia">
+                                                </div>   
+
+                                                <div class="form-group my-3">
+                                                    <label class="mb-2">Cuerpo</label><br >
+                                                        <textarea name="cuerpo" rows="10" cols="40" placeholder="Ingrese nuevo cuerpo de la noticia"></textarea>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary mt-3 botones">Actualizar</button>
+
+                                                </form>
+
+                                                </div>
+
+                                                <section class=" text-center container">
+                                                    <div class="row mt-3">
+                                                        <div class="divVolver">
+                                                            <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                        
+                                                <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Error!</h5>
+                                                        <p class="card-text" th:text="${error}"></p>
+                                                    </div>
+                                                </div>
+                                                <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Exito!</h5>
+                                                        <p class="card-text" th:text="${exito}"></p>
+                                                    </div>
+                                                </div>
+
+
+                                                </body>
+                                                </html>

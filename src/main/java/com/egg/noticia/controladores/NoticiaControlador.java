@@ -4,12 +4,11 @@ import com.egg.noticia.entidades.Noticia;
 import com.egg.noticia.excepciones.MiException;
 import com.egg.noticia.servicios.NoticiaServicio;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,29 +43,61 @@ public class NoticiaControlador {
         }
         return "index.html";
     }
-    
-    @GetMapping("/eliminar")
-    public String eliminar(ModelMap modelo){
+
+    @GetMapping("/lista")
+    public String listar(ModelMap modelo){
         
-        List <Noticia> noticias = noticiaService.listarNoticias();
+        List<Noticia> noticias = noticiaService.listarNoticias();
         
         modelo.addAttribute("noticias", noticias);
         
-        /* HACER ESTO  en HTML PARA ELEGIR LA NOTICIA A ELIMINAR
-        <div class="form-group my-3">
+        return "noticia_list.html";
+    }
+    
+    @GetMapping("/modificar/{id}")
+    public String modificar(@PathVariable String id, ModelMap modelo){
+        modelo.put("noticia", noticiaService.getOne(id));
+        
+        return "noticia_modificar.html";
+    }
+    
+    @PostMapping("/modificar/{id}")
+    public String modificar(@PathVariable String id, String titulo, String cuerpo, ModelMap modelo){
+        
+        try {
+            noticiaService.modificarNoticia(id, titulo, cuerpo);
+            
+            return "redirect:../lista";
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+            return "noticia_modificar.html";
+        }
+    }
+    
+    @GetMapping("/eliminar")
+    public String eliminar( ModelMap modelo) {
 
-                    <select name="idAutor">
+        List<Noticia> noticias = noticiaService.listarNoticias();
 
-                        <option>Seleccionar Autor</option>
+        modelo.addAttribute("noticias", noticias);
 
-                        <option th:each="autor : ${autores}"
-                                th:value="${autor.id}"
-                                th:text="${autor.nombre}"
-                                />
-                    </select>
-                </div>
-*/
         return "noticia_delete.html";
+    }
+
+    @PostMapping("/eliminacion")
+    public String eliminacion(@RequestParam String titulo, ModelMap modelo) {
+
+        try {
+            noticiaService.eliminarNoticia(titulo);
+            modelo.put("exito", "La noticia se ha eliminado correctamente");
+
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+            return "noticia_delete.html";
+
+        }
+
+        return "index.html";
     }
 
 }

@@ -21,10 +21,10 @@
                                         <a class="nav-link" th:href="@{/noticia/registrar}">Crear noticia <span class="sr-only">(ahora)</span></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="@{/noticia/listar}">Listar Noticias</a>
+                                        <a class="nav-link" th:href="@{/noticia/lista}">Listar Noticias</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="@{/noticia/listar}">Modificar Noticias</a> <!-- EN REALIDAD NO HAY UNA RUTA A  MODIFCAR-->
+                                        <a class="nav-link" th:href="@{/noticia/eliminar}">Eliminar Noticias</a>
                                     </li>
                                 </ul>
                             </div>
@@ -37,54 +37,54 @@
                             <form class="formulario" th:action="@{/noticia/registro}" method="POST">
                                 <div class="form-group my-3">
                                     <label class="mb-2">Cargar Noticia</label> 
-                                    <br>
-                                        <input type="text" name="titulo" placeholder="Titulo de la noticia">
-                                            <br>
-                                                <br>
-                                                    <textarea name="cuerpo" rows="10" cols="40" placeholder="Cuerpo de la noticia"></textarea>
-                                                    </div>
+                                </div>
+                                <div class="form-group my-3">
+                                    <input type="text" name="titulo" placeholder="Titulo de la noticia">
+                                </div>   
+                                <div class="form-group my-3">
+                                    <textarea name="cuerpo" rows="10" cols="40" placeholder="Cuerpo de la noticia"></textarea>
+                                </div>
 
-                                                    <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
-                                                    </form>
+                                <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
+                            </form>
 
-
-
-                                                    <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
-                                                        <div class="card-body">
-                                                            <h5 class="card-title">Exito!</h5>
-                                                            <p class="card-text" th:text="${exito}"></p>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError" >
-                                                        <div class="card-body">
-                                                            <h5 class="card-title">Error 👎</h5>
-                                                            <p class="card-text" th:text="${error}"></p>
-                                                        </div>
-                                                    </div>
+                        </div>
+                        
+                        <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+                            <div class="card-body">
+                                <h5 class="card-title">Exito!</h5>
+                                <p class="card-text" th:text="${exito}"></p>
+                            </div>
+                        </div>
 
 
-                                                    <section class=" text-center container">
-                                                        <div class="row mt-3">
-                                                            <div class="divVolver">
-                                                                <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
-                                                            </div>
-                                                        </div>
-                                                    </section>
-                                                    </div>
-
-                                                    <footer class="text-muted py-5">
-                                                        <div class="containerFooter">
-                                                            <p class="mb-1">Album example is &copy; Bootstrap,<br>but please download and customize it for yourself!</p>
-                                                            <p class="mb-0">New to Bootstrap? <a href="/"><br>Visit the homepage</a> or read our <a href="../getting-started/introduction/">getting started guide</a>.</p>
-                                                            <p class="float-end mb-1">
-                                                                <a href="#" style="text-decoration:none"><span>⬆️</span> Back to top</a>
-                                                            </p>
-                                                        </div>
-                                                    </footer>
+                        <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError" >
+                            <div class="card-body">
+                                <h5 class="card-title">Error 👎</h5>
+                                <p class="card-text" th:text="${error}"></p>
+                            </div>
+                        </div>
 
 
-                                                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-                                                    </body>
-                                                    </html>
+                        <section class=" text-center container">
+                            <div class="row mt-3">
+                                <div class="divVolver">
+                                    <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                                </div>
+                            </div>
+                        </section>
+
+                        <footer class="text-muted py-5">
+                            <div class="containerFooter">
+                                <p class="mb-1">Album example is &copy; Bootstrap,<br>but please download and customize it for yourself!</p>
+                                <p class="mb-0">New to Bootstrap? <a href="/"><br>Visit the homepage</a> or read our <a href="../getting-started/introduction/">getting started guide</a>.</p>
+                                <p class="float-end mb-1">
+                                    <a href="#" style="text-decoration:none"><span>⬆️</span> Back to top</a>
+                                </p>
+                            </div>
+                        </footer>
+
+
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+                    </body>
+                    </html>

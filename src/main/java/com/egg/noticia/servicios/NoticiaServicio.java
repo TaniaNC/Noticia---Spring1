@@ -56,6 +56,19 @@ public class NoticiaServicio {
         }
 
     }
+    
+    public Noticia getOne(String id){
+        return noticiaRepositorio.getOne(id);
+    }
+    
+    public void eliminarNoticia(String titulo) throws MiException{
+        
+        Noticia noticiaEncontrada = noticiaRepositorio.buscarNorticiaPorTitulo(titulo);
+        
+        validar(noticiaEncontrada.getTitulo(), noticiaEncontrada.getCuerpo());
+        
+        noticiaRepositorio.delete(noticiaEncontrada);
+    }
 
     public void validar(String titulo, String cuerpo) throws MiException {
 
